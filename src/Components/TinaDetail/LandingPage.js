@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { data } from "./TinaData";
-import Toggle from "../TaibatHomePage/toggle";
+import Toggle from "../ApartmentHome/toggle";
+import PartDetail from "../TobiDetails/PartDetail";
+
 // import { Link } from "react-router-dom";
 
-const TaibaaatHome = () => {
+const LandingPage = () => {
   return (
     <Container>
       <Wrapper>
+      <View>
         <Content>
           {data?.map((prop) => {
             const {
@@ -48,38 +51,51 @@ const TaibaaatHome = () => {
             );
           })}
         </Content>
+        <PartDetail/>
+       </View>
       </Wrapper>
     </Container>
   );
 };
 
-export default TaibaaatHome;
+export default LandingPage;
+
+const View = styled.div` 
+ 
+display: flex; 
+flex-wrap: wrap; 
+background-color:#e6ebf3; 
+
+` 
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction:column;
+  
 `;
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   background: #ffffff;
+  flex-direction:column;
+  align-items: center;
+  justify-content: space between;
 `;
-
-const Content = styled.div`
-  margin-top: 20px;
-  display: flex;
-`;
-
 const Card = styled.div`
   position: relative;
   width: 300px;
   height: 200px;
   border-radius: 10px;
-  margin: 10px 20px;
   border: solid 1px #dddddd;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  overflow: hidden;
   :hover {
     cursor: pointer;
   }
@@ -93,6 +109,13 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
+const Content = styled.div`
+  margin-top: 20px;
+  display: flex;
+  // justify-content: center;
+  flex-wrap: wrap;
+
+`;
 const Time = styled.button`
   position: absolute;
   width: 90px;

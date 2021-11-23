@@ -9,9 +9,11 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection } from "@firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate()
   const [reg, setReg] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -40,7 +42,7 @@ const Register = () => {
 
   const onSubmitSignUp = async (data) => {
     console.log(data);
-    const { email, password, userName } = data;
+    const { email, password, userName, confirm } = data;
     setPending(true);
     try {
       const user = await createUserWithEmailAndPassword(fireAuth, email, password);
@@ -55,6 +57,7 @@ const Register = () => {
       setPending(false);
       setIsError("An error occured, try again");
     }
+    navigate('/');
   };
   const onSubmitSignIn = async (e) => {
     e.preventDefault();
@@ -75,6 +78,7 @@ const Register = () => {
           return setIsError("error");
       }
     }
+    
   };
   return (
     <Container>
@@ -93,7 +97,7 @@ const Register = () => {
                 <Input type="password" placeholder="Confirm password" {...register("confirm")} />
                 <Error>{errors.confirm?.message}</Error>
                 {!pending && <Button type="submit">Sign up</Button>}
-                {pending && <Button disabled>Loading</Button>}
+                {pending && <Button disabled>Loading...</Button>}
 
                 <div>Already have an account?</div>
                 <Btn onClick={handleSignIn}>Sign In!</Btn>
@@ -120,6 +124,7 @@ const Register = () => {
                 {pending && <Button disabled>Loading</Button>}
                 <div>New to Apartments?</div>
                 <Btn onClick={handleSignIn}>Join now!</Btn>{" "}
+                <Btn onClick={handleSignIn}>Register As An Agent!</Btn>{" "}
               </Form>
             </div>
           )}
@@ -138,7 +143,6 @@ const Card = styled.div`
   border: 1px solid lightgray;
   padding: 20px 20px;
   border-radius: 10px;
-
   box-shadow: -1px -6px 76px -15px rgba(0, 0, 0, 0.68) inset;
   -webkit-box-shadow: -1px -6px 76px -15px rgba(0, 0, 0, 0.68) inset;
   -moz-box-shadow: -1px -6px 76px -15px rgba(0, 0, 0, 0.68) inset;

@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { fireAuth } from "../../firebase";
-import authImg from "../../Image/authImg.png";
+import authImg from "./authImg.png";
 import Register from "./register";
 import { useContext } from "react";
-import { AuthContext} from "../../firebase";
+import { AuthContext } from "./Context";
 
 const Main = () => {
   const { currentUser } = useContext(AuthContext);
@@ -52,6 +52,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: relative;
 `;
 const Container = styled.div`
   width: 100%;
